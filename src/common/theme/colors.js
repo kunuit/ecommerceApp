@@ -1,12 +1,11 @@
 export default {
-  primary: '#22272E',
-  secondary: '#FFAC00',
+  primary: '#53B175',
+  secondary: '#414757',
   error: '#f13a59',
   notBlack: '#181725',
   notGray: '#7C7C7C',
   gray: '#B3B3B3',
   notPink: '#FA8072',
-  notOrange: '#FA3E1C',
   lineBorder: '#E2E2E2',
   darkGreen: '#013220',
   aqua: '#0FFFFF',
@@ -35,4 +34,4 @@ export default {
   mBlack: '#333333',
   lBlack: '#555555',
   pink: '#eb2f96',
-}
+};
