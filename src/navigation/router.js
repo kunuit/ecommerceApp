@@ -7,4 +7,10 @@ export const Router = {
   Cart: 'Cart',
   Heart: 'Heart',
   Profile: 'Profile',
+  HomeAuth: 'HomeAuth',
+
+  // auth
+  Login: 'Login',
+  Register: 'Register',
+  ForgotPassword: 'ForgotPassword',
 };

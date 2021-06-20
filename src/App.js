@@ -18,6 +18,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import {NavigationContainer} from '@react-navigation/native';
 import AppNavigation from './navigation/index';
@@ -29,6 +30,8 @@ const App = () => {
     <View style={{flex: 1, backgroundColor: Theme.backgrounds.white}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <AppNavigation />
+
+      <Toast ref={ref => Toast.setRef(ref)} />
     </View>
   );
 };

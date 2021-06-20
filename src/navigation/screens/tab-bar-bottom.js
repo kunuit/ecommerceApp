@@ -6,6 +6,7 @@ import {HeightScreen, Theme} from '@src/common/theme';
 import Icon from 'react-native-vector-icons/AntDesign';
 import TabBarIcon from '../components/tab-bar-icon';
 import {Router} from '../router';
+import {Profile, HomeAuth} from '@features/auth/screens';
 
 function HomeScreen() {
   return (
@@ -42,6 +43,7 @@ const TabBarBottom = () => {
           borderTopStartRadius: 25,
           position: 'absolute',
           paddingHorizontal: 8,
+          shadowOpacity: 0.15,
         },
         showIcon: true,
         showLabel: false,
@@ -80,7 +82,7 @@ const TabBarBottom = () => {
       />
       <Tab.Screen
         name={Router.Heart}
-        component={DetailsScreen}
+        component={HomeAuth}
         showIcon={true}
         options={{
           tabBarIcon: ({focused}) => (
@@ -90,7 +92,7 @@ const TabBarBottom = () => {
       />
       <Tab.Screen
         name={Router.Profile}
-        component={DetailsScreen}
+        component={Profile}
         showIcon={true}
         options={{
           tabBarIcon: ({focused}) => (
