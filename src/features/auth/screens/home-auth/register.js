@@ -14,6 +14,7 @@ import Button from '@src/components/Button';
 import {Router} from '@src/navigation/router';
 import {Theme} from '@src/common/theme';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   nameValidator,
   emailValidator,
@@ -23,6 +24,7 @@ import {
 } from '../../modules/auth.validation';
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch();
   let ref_input1 = useRef();
   let ref_input2 = useRef();
   let ref_input3 = useRef();
@@ -41,6 +43,10 @@ const RegisterScreen = () => {
   });
   const [phone, setPhone] = useState({value: '', error: ''});
   const [address, setAddress] = useState({value: '', error: ''});
+
+  const {errorRegister, isRegister, isRegisterLoading} = useSelector(
+    state => state.auth,
+  );
 
   const _onSignUpPressed = () => {
     const nameError = nameValidator(name.value);
@@ -74,23 +80,33 @@ const RegisterScreen = () => {
       return;
     }
 
-    // dispatch({
-    //   type: typeAuths.register,
-    //   payload: {
-    //     username: name.value,
-    //     fullName: fullName.value,
-    //     // email: email.value,
-    //     password: password.value,
-    //     // phone: phone.value,
-    //     // addressDetail: address.value,
-    //   },
-    // });
+    dispatch({
+      type: typeAuths.register,
+      payload: {
+        username: name.value,
+        fullName: fullName.value,
+        // email: email.value,
+        password: password.value,
+        // phone: phone.value,
+        // addressDetail: address.value,
+      },
+    });
   };
 
-  // if (isRegister) {
-  //   navigation.goBack();
-  //   dispatch(resetRegisterACT());
-  // }
+  useEffect(() => {
+    if (isRegister) {
+      navigation.goBack();
+      dispatch({
+        type: typeAuths.changeFields,
+        payload: {
+          changeFields: {
+            isRegister: false,
+            errorRegister: null,
+          },
+        },
+      });
+    }
+  }, [isRegister]);
 
   return (
     <Background>
@@ -106,7 +122,7 @@ const RegisterScreen = () => {
         Create account
       </Text>
 
-      {/* {errorRegister != null ? <TextError error={errorRegister} /> : <></>} */}
+      {errorRegister && <Text style={styles.error}>{errorRegister}</Text>}
 
       <TextInputCus
         label="Username"
@@ -201,8 +217,8 @@ const RegisterScreen = () => {
       <Button
         style={{backgroundColor: Theme.colors.primary}}
         onPress={_onSignUpPressed}
-        disabled={false}>
-        {false ? (
+        disabled={isRegisterLoading}>
+        {isRegisterLoading ? (
           <ActivityIndicator
             style={{opacity: 1}}
             animating={true}
@@ -242,6 +258,13 @@ const styles = StyleSheet.create({
   link: {
     fontFamily: Theme.fontFamily.GilroyExtraBold,
     color: Theme.colors.primary,
+  },
+  error: {
+    width: '70%',
+    color: Theme.colors.error,
+    fontFamily: Theme.fontFamily.QuicksandMedium,
+    fontSize: Theme.size.small,
+    textAlign: 'center',
   },
 });
 

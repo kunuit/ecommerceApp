@@ -15,7 +15,7 @@ export const infoValidator = info => {
 
 export const passwordValidator = password => {
   if (!password || password.length <= 0) return 'Password cannot be empty.';
-  if (password.length <= 7) return 'Password must more 7 words';
+  if (password.length <= 5) return 'Password must more 5 words';
 
   return '';
 };

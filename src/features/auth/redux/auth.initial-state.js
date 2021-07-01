@@ -1,0 +1,15 @@
+export const initState = {
+  dataCustomer: null,
+  token: null,
+  refreshToken: null,
+  isLogin: false,
+  isRegister: false,
+  errorRefreshToken: null,
+  errorLogin: null,
+  errorRegister: null,
+  isAuthLoading: false,
+  isRegisterLoading: false,
+  isAdmin: false,
+  isAdminLogin: false,
+  isRequireLogin: false,
+};

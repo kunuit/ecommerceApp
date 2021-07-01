@@ -1,5 +1,11 @@
-import React, {useRef, useState} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useRef, useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import Background from '@src/components/Background';
 import Logo from '@src/components/Logo';
 import {Theme} from '@src/common/theme';
@@ -9,13 +15,24 @@ import {showToast} from '@src/common/layout/toast.helper';
 import {Router} from '@src/navigation/router';
 import {useNavigation} from '@react-navigation/native';
 import {infoValidator, passwordValidator} from '../../modules/auth.validation';
+import {useDispatch, useSelector} from 'react-redux';
+import {typeAuths} from '../../redux/auth.type';
 
 const Login = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   let ref_input2 = useRef();
   let ref_input1 = useRef();
   const [email, setEmail] = useState({value: '', error: ''});
   const [password, setPassword] = useState({value: '', error: ''});
+
+  const {errorLogin, isLogin, isAuthLoading} = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (isLogin) {
+      navigation.navigate(Router.BottomTabBar);
+    }
+  }, [isLogin]);
 
   const _onLoginPressed = () => {
     const emailError = infoValidator(email.value);
@@ -26,10 +43,10 @@ const Login = () => {
       return;
     }
     // //! dispatch to check loginACT
-    // dispatch({
-    //   type: typeAuths.login,
-    //   payload: { username: email.value, password: password.value },
-    // });
+    dispatch({
+      type: typeAuths.login,
+      payload: {username: email.value, password: password.value},
+    });
     // //! dispatch to login via Firebase
     // // dispatch(
     // //   loginViaFirebaseACT({ email: email.value, password: password.value })
@@ -58,6 +75,8 @@ const Login = () => {
           }}>
           Welcome back
         </Text>
+
+        {!!errorLogin && <Text style={styles.error}>{errorLogin}</Text>}
 
         <TextInputCus
           label="Email or Username"
@@ -96,8 +115,8 @@ const Login = () => {
         <Button
           style={{backgroundColor: Theme.colors.primary}}
           onPress={_onLoginPressed}
-          disabled={false}>
-          {false ? (
+          disabled={isAuthLoading}>
+          {isAuthLoading ? (
             <ActivityIndicator
               style={{opacity: 1}}
               animating={true}
@@ -157,5 +176,12 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: Theme.fontFamily.GilroySemiBold,
     color: Theme.colors.secondary,
+  },
+  error: {
+    width: '70%',
+    color: Theme.colors.error,
+    fontFamily: Theme.fontFamily.QuicksandMedium,
+    fontSize: Theme.size.small,
+    textAlign: 'center',
   },
 });

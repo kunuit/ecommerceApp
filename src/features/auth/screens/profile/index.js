@@ -4,8 +4,11 @@ import {StyleSheet, Text, View, FlatList, Platform} from 'react-native';
 import ButtonLogOut from '../../components/profile.component/ButtonLogOut';
 import InfoCard from '../../components/profile.component/info-card';
 import InfoProfile from '../../components/profile.component/info-profile';
+import {useDispatch} from 'react-redux';
+import {typeAuths} from '../../redux/auth.type';
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const arrInfoCard = [
     {nameIcon: 'basket-outline', name: 'Orders'},
     {nameIcon: 'newspaper-outline', name: 'My Details'},
@@ -26,7 +29,9 @@ const Profile = () => {
         }}
         keyExtractor={(item, index) => index.toString()}
         ListHeaderComponent={InfoProfile}
-        ListFooterComponent={ButtonLogOut}
+        ListFooterComponent={
+          <ButtonLogOut onPress={() => dispatch({type: typeAuths.logout})} />
+        }
       />
     </View>
   );

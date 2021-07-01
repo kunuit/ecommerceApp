@@ -30,7 +30,7 @@ const AppNavigation = () => {
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <Stack.Screen name="TabBarBottom" component={TabBarBottom} />
+      <Stack.Screen name={Router.BottomTabBar} component={TabBarBottom} />
 
       {[
         {name: Router.Login, component: Login},

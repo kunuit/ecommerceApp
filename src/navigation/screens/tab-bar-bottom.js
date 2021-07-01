@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import TabBarIcon from '../components/tab-bar-icon';
 import {Router} from '../router';
 import {Profile, HomeAuth} from '@features/auth/screens';
+import {useSelector} from 'react-redux';
 
 function HomeScreen() {
   return (
@@ -27,6 +28,8 @@ function DetailsScreen() {
 const Tab = createBottomTabNavigator();
 
 const TabBarBottom = () => {
+  const {isLogin} = useSelector(state => state.auth);
+
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -92,7 +95,7 @@ const TabBarBottom = () => {
       />
       <Tab.Screen
         name={Router.Profile}
-        component={Profile}
+        component={isLogin ? Profile : HomeAuth}
         showIcon={true}
         options={{
           tabBarIcon: ({focused}) => (

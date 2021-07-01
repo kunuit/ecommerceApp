@@ -6,14 +6,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Theme} from '@src/common/theme';
 import Button from '@src/components/Button';
 
-const ButtonLogOut = () => {
+const ButtonLogOut = ({onPress}) => {
   return (
     <View style={styles.buttonLogOutContainer}>
       <Button
         style={{backgroundColor: Theme.backgrounds.paper}}
-        onPress={() => {
-          console.log('logout');
-        }}>
+        onPress={onPress}>
         <View style={styles.buttonLogOut}>
           <Icon
             name="md-log-out-outline"
