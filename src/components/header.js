@@ -30,7 +30,7 @@ const Header = ({
           onPress={() => {
             navigation.goBack();
           }}>
-          {isBack ? (
+          {isBack && (
             <View
               style={[
                 styles.icon,
@@ -43,25 +43,6 @@ const Header = ({
               ]}>
               <Icon
                 name="left"
-                size={20}
-                color={
-                  isBorder ? Theme.backgrounds.white : Theme.colors.secondary
-                }
-              />
-            </View>
-          ) : (
-            <View
-              style={[
-                styles.icon,
-                {marginLeft: 12},
-                isBorder
-                  ? {
-                      backgroundColor: Theme.backgrounds.buttonBack,
-                    }
-                  : {},
-              ]}>
-              <Icon
-                name="clockcircleo"
                 size={20}
                 color={
                   isBorder ? Theme.backgrounds.white : Theme.colors.secondary
@@ -125,7 +106,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     flexDirection: 'row',
     paddingTop: Platform.OS === 'ios' ? 44 + 8 : 8,
-    backgroundColor: Theme.colors.primary,
+    backgroundColor: Theme.backgrounds.white,
     // backgroundColor: Theme.backgrounds.transparent,
     paddingBottom: 10,
     alignItems: 'center',

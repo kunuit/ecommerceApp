@@ -6,6 +6,7 @@ import {HeightScreen, Theme} from '@src/common/theme';
 import Icon from 'react-native-vector-icons/AntDesign';
 import TabBarIcon from '../components/tab-bar-icon';
 import {Router} from '../router';
+import {ExploreScreen} from '@features/category/screens';
 import {Profile, HomeAuth} from '@features/auth/screens';
 import {useSelector} from 'react-redux';
 
@@ -65,7 +66,7 @@ const TabBarBottom = () => {
       />
       <Tab.Screen
         name={Router.Explore}
-        component={DetailsScreen}
+        component={ExploreScreen}
         showIcon={true}
         options={{
           tabBarIcon: ({focused}) => (
