@@ -17,13 +17,6 @@ function* fetchALLSaga(action) {
 
   const {code, error, message, payload} = yield call(getAllCategoryAPI);
 
-  console.log(`const {data,error, message, payload}`, {
-    code,
-    error,
-    message,
-    payload,
-  });
-
   if (error) {
     yield put({
       type: TypeCategory.changeFields,
